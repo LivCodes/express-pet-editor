@@ -3,7 +3,8 @@ const app = express()
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {console.log(`Server started on port ${PORT}`)})
-
+app.use(express.urlencoded({extended: false}))
+app.set("view engine", 'ejs')
 let pets = [
   {
     id: 1,
@@ -42,6 +43,11 @@ app.get('/', (req, res) => {
 
 app.get('/pets', (req, res) => {
   res.redirect('/')
+})
+
+app.get('/pets/:id',(req, res) => {
+  //if a card is clicked on it leads here
+  res.render("edit")
 })
 
 app.get("*", (req, res) => {
